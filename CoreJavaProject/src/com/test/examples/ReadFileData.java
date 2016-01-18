@@ -7,6 +7,7 @@ public class ReadFileData {
 	public static void main(String[] args)  throws Exception{
 		FileInputStream fin = new FileInputStream("C:\\Jan2016\\CoreJavaProject\\src\\com\\test\\examples\\Student.java");
 		int data;
+		System.out.println("Reading File Data");
 		while( (data=fin.read()) != -1){
 			System.out.print((char)data);
 		}
