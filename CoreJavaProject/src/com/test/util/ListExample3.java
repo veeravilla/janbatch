@@ -2,6 +2,7 @@ package com.test.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.test.oops.Pen;
@@ -9,7 +10,7 @@ import com.test.oops.Pen;
 public class ListExample3 {
 
 	public static void main(String[] args) {
-		List<Student> stuList = new ArrayList<Student>();
+		List<Student> stuList = new LinkedList<Student>();//new ArrayList<Student>();
 		stuList.add(new Student(567, "Jhon", 323));
 		stuList.add(new Student(45, "Ave", 6452));
 		stuList.add(new Student(57, "Tim", 4552));
@@ -33,9 +34,11 @@ public class ListExample3 {
 			System.out.println("Not Found");
 		}
 		
-		
-	//	Collections.sort(stuList);
-
+		System.out.println("before Sort " + stuList);
+		//Collections.sort(stuList);
+		//Collections.sort(stuList,new NameSort());
+		Collections.sort(stuList,new FeeSort());
+		System.out.println("after Sort " + stuList);
 	}
 
 }

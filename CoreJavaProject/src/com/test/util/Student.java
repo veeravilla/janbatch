@@ -1,6 +1,6 @@
 package com.test.util;
 
-public class Student {
+public class Student  implements Comparable<Student>{
 
 	private int sno;
 	private String sname;
@@ -23,6 +23,28 @@ public class Student {
 				+ "]";
 	}
 
+	
+	
+	
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(fee);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((sname == null) ? 0 : sname.hashCode());
+		result = prime * result + sno;
+		return result;
+	}
+
+
+
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -43,6 +65,11 @@ public class Student {
 			return false;
 		return true;
 	}
+
+
+
+
+
 
 	public Student() {
 
@@ -77,6 +104,16 @@ public class Student {
 
 	public void setFee(double fee) {
 		this.fee = fee;
+	}
+
+	@Override
+	public int compareTo(Student studentObj) { // default Sort Logic
+		if(this.sno < studentObj.getSno()){
+			return -1; // <
+		}else if (this.sno > studentObj.getSno()){
+			return 1; // >
+		}else
+			return  0; // ==
 	}
 
 }
