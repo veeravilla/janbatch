@@ -1,0 +1,170 @@
+ Apache Commons logo Commons IO
+Apache Commons IO ™
+
+    Last Published: 17 February 2014
+    |
+    Version: 2.5-SNAPSHOT
+
+    ApacheCon
+    Apache
+    Commons
+
+    Commons IO
+    Overview
+    Download
+    User guide
+    Best practices
+    Javadoc 2.4
+    Javadoc 2.2
+    Javadoc 1.4
+
+    Development
+    Building
+    Mailing lists
+    Issue Tracking
+    Team
+    Tasks
+    Proposal
+    SVN repository
+    Javadoc (latest SVN)
+
+    Project Documentation
+    Project Information
+    Project Reports
+
+    Commons
+    Home
+    License
+    Components
+    Sandbox
+    Dormant
+
+    General Information
+    Volunteering
+    Contributing Patches
+    Building Components
+    Releasing Components
+    Wiki
+
+    ASF
+    How the ASF works
+    Get Involved
+    Developer Resources
+    Sponsorship
+    Thanks
+
+ApacheCon
+Maven
+	
+User guide
+
+Commons-IO contains utility classes, endian classes, line iterator, file filters, file comparators and stream implementations.
+
+For a more detailed descriptions, take a look at the javadocs.
+Utility classes
+IOUtils
+
+IOUtils contains utility methods dealing with reading, writing and copying. The methods work on InputStream, OutputStream, Reader and Writer.
+
+As an example, consider the task of reading bytes from a URL, and printing them. This would typically done like this:
+
+ InputStream in = new URL( "http://commons.apache.org" ).openStream();
+ try {
+   InputStreamReader inR = new InputStreamReader( in );
+   BufferedReader buf = new BufferedReader( inR );
+   String line;
+   while ( ( line = buf.readLine() ) != null ) {
+     System.out.println( line );
+   }
+ } finally {
+   in.close();
+ }
+
+With the IOUtils class, that could be done with:
+
+ InputStream in = new URL( "http://commons.apache.org" ).openStream();
+ try {
+   System.out.println( IOUtils.toString( in ) );
+ } finally {
+   IOUtils.closeQuietly(in);
+ }
+
+In certain application domains, such IO operations are common, and this class can save a great deal of time. And you can rely on well-tested code.
+
+For utility code such as this, flexibility and speed are of primary importance. However you should also understand the limitations of this approach. Using the above technique to read a 1GB file would result in an attempt to create a 1GB String object!
+FileUtils
+
+The FileUtils class contains utility methods for working with File objects. These include reading, writing, copying and comparing files.
+
+For example to read an entire file line by line you could use:
+
+ File file = new File("/commons/io/project.properties");
+ List lines = FileUtils.readLines(file, "UTF-8");
+
+FilenameUtils
+
+The FilenameUtils class contains utility methods for working with filenames without using File objects. The class aims to be consistent between Unix and Windows, to aid transitions between these environments (such as moving from development to production).
+
+For example to normalize a filename removing double dot segments:
+
+ String filename = "C:/commons/io/../lang/project.xml";
+ String normalized = FilenameUtils.normalize(filename);
+ // result is "C:/commons/lang/project.xml"
+
+FileSystemUtils
+
+The FileSystemUtils class contains utility methods for working with the file system to access functionality not supported by the JDK. Currently, the only method is to get the free space on a drive. Note that this uses the command line, not native code.
+
+For example to find the free space on a drive:
+
+ long freeSpace = FileSystemUtils.freeSpace("C:/");
+
+Endian classes
+
+Different computer architectures adopt different conventions for byte ordering. In so-called "Little Endian" architectures (eg Intel), the low-order byte is stored in memory at the lowest address, and subsequent bytes at higher addresses. For "Big Endian" architectures (eg Motorola), the situation is reversed.
+
+There are two classes in this package of relevance:
+
+    The EndianUtils class contains static methods for swapping the Endian-ness of Java primitives and streams.
+    The SwappedDataInputStream class is an implementation of the DataInput interface. With this, one can read data from files of non-native Endian-ness.
+
+For more information, see http://www.cs.umass.edu/~verts/cs32/endian.html
+Line iterator
+
+The org.apache.commons.io.LineIterator class provides a flexible way for working with a line-based file. An instance can be created directly, or via factory methods on FileUtils or IOUtils. The recommended usage pattern is:
+
+ LineIterator it = FileUtils.lineIterator(file, "UTF-8");
+ try {
+   while (it.hasNext()) {
+     String line = it.nextLine();
+     /// do something with line
+   }
+ } finally {
+   LineIterator.closeQuietly(iterator);
+ }
+
+File filters
+
+The org.apache.commons.io.filefilter package defines an interface (IOFileFilter) that combines both java.io.FileFilter and java.io.FilenameFilter. Besides that the package offers a series of ready-to-use implementations of the IOFileFilter interface including implementation that allow you to combine other such filters. These filters can be used to list files or in FileDialog, for example.
+
+See the filefilter package javadoc for more details.
+File comparators
+
+The org.apache.commons.io.comparator package provides a number of java.util.Comparator implementations for java.io.File. These comparators can be used to sort lists and arrays of files, for example.
+
+See the comparator package javadoc for more details.
+Streams
+
+The org.apache.commons.io.input and org.apache.commons.io.output packages contain various useful implementations of streams. These include:
+
+    Null output stream - that silently absorbs all data sent to it
+    Tee output stream - that sends output data to two streams instead of one
+    Byte array output stream - that is a faster version of the JDK class
+    Counting streams - that count the number of bytes passed
+    Proxy streams - that delegate to the correct method in the proxy
+    Lockable writer - that provides synchronization of writes using a lock file
+
+See the input or output package javadoc for more details.
+
+Copyright © 2002-2014 The Apache Software Foundation. All Rights Reserved.
+Apache Commons, Apache Commons IO, Apache, the Apache feather logo, and the Apache Commons project logos are trademarks of The Apache Software Foundation. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
