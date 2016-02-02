@@ -2,10 +2,12 @@ package com.test.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "student")
+@NamedQuery(name="findByName",query="From com.test.pojo.Student stu where stu.sname like :sname")
 public class Student {
 
 	@Id
