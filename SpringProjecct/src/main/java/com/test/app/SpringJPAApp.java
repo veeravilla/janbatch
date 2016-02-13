@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.test.dto.StudentDTO;
-import com.test.service.StudentService;
+import com.test.jpa.service.StudentService;
 
 public class SpringJPAApp {
 
@@ -15,7 +15,7 @@ public class SpringJPAApp {
 		System.out.println(springContainer);
 		
 		StudentService studentService = springContainer.getBean(StudentService.class);
-		StudentDTO studentDTO = studentService.getStudent(876);
+		StudentDTO studentDTO = studentService.getStudent(102);
 		System.out.println(studentDTO);
 	}
 

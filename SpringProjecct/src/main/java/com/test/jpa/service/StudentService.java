@@ -1,13 +1,13 @@
-package com.test.service;
+package com.test.jpa.service;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.test.dao.StudentDAO;
 import com.test.dao.pojo.Student;
 import com.test.dto.StudentDTO;
+import com.test.jpa.dao.StudentDAO;
 
 @Service
 @Transactional

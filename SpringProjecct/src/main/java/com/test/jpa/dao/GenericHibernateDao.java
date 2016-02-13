@@ -1,4 +1,4 @@
-package com.test.dao;
+package com.test.jpa.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
