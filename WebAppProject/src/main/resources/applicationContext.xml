@@ -13,7 +13,10 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 	<context:annotation-config />
 
 	<context:component-scan base-package="com.test" />
-
+	
+	<!-- JPA Configs -->
+	<import resource="spring-jpa-context.xml"/>
+	
 	<!-- View Reslover -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
