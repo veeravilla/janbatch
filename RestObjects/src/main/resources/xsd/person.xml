@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<person xmlns="http://www.test.com/xproject">
+	<pid>789</pid>
+	<pname>Jhon</pname>
+	<address>
+		<city>Plymoth</city>
+		<state>MN</state>
+		<zipcode>55447</zipcode>
+	</address>
+</person>
